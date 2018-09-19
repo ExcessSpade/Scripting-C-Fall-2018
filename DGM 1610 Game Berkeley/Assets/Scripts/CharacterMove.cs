@@ -18,7 +18,7 @@ public class CharacterMove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		print("Hello World");
+		print("Wahya Buerre");
 	}
 	
 
@@ -31,7 +31,7 @@ public class CharacterMove : MonoBehaviour {
 	void Update () {
 		
 		// This Code Makes The Character Jump
-		if(Input.GetKeyDown (KeyCode.Space)){
+		if(Input.GetKeyDown (KeyCode.Space)&& Grounded){
 			Jump();
 		}
 
@@ -41,7 +41,7 @@ public class CharacterMove : MonoBehaviour {
 
 		}
 		if(Input.GetKey (KeyCode.A)){
-			GetComponent<Rigidbody2D>().velocity =new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
 		}
 
