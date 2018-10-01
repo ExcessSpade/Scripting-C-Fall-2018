@@ -9,6 +9,7 @@ public class CharacterMove : MonoBehaviour {
 	// Player Movement Variables
 	public int MoveSpeed;
 	public float JumpHeight;
+	private bool SecondJump;
 
 	// Player Grounded Variables
 	public Transform GroundCheck;
@@ -16,13 +17,16 @@ public class CharacterMove : MonoBehaviour {
 	public LayerMask WhatIsGround;
 	private bool Grounded;
 
+	//Non-Stick Player
+	private float MoveVelocity;
+
 	// Use this for initialization
 	void Start () {
 		print("Wahya Buerre");
 	}
 	
 
-	void fixedupdate () {
+	void FixedUpdate () {
 		Grounded = Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, WhatIsGround);
 	}
 
@@ -35,15 +39,32 @@ public class CharacterMove : MonoBehaviour {
 			Jump();
 		}
 
+		//Double Jump Code
+		if(Grounded)
+			SecondJump = false;
+
+		if(Input.GetKeyDown (KeyCode.Space)&& !SecondJump && !Grounded){
+			Jump();
+			SecondJump = true;
+		}
+
+		//Non-Stick Player
+		MoveVelocity = 0f;
+
 		// This Code Makes The Character Move From Side to Side Using The A&D Keys
 		if(Input.GetKey (KeyCode.D)){
-			GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			//GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			MoveVelocity = MoveSpeed;
 
 		}
 		if(Input.GetKey (KeyCode.A)){
-			GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			//GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			MoveVelocity = -MoveSpeed;
 
 		}
+
+		GetComponent<Rigidbody2D>().velocity = new Vector2(MoveVelocity, GetComponent<Rigidbody2D>().velocity.y);
+
 
 
 	}
