@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine;	
+
 
 public class LevelManager : MonoBehaviour {
 
@@ -28,14 +30,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 
-
-
-
-
-
-
-
-
 	public void RespawnPlayer(){
 	StartCoroutine ("RespawnPlayerCo");
 	}
@@ -59,7 +53,7 @@ public class LevelManager : MonoBehaviour {
 		// Gravity Restore
 		Player.GetComponent<Rigidbody2D>().gravityScale = GravityStore;
 		// Match Players transform position
-		Player.transform.position = CurrentCheckPoint.position;
+		Player.transform.position = CurrentCheckPoint.transform.position;
 		// Show Player
 		// Player.enabled = true;
 		Player.GetComponent<Renderer> ().enabled = true;
